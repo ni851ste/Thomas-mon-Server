@@ -1,5 +1,5 @@
-name := """WeWe"""
-organization := "Wde.htwg.se"
+name := """Thomas-Mon-Server"""
+organization := "knxamk.de"
 
 version := "1.0-SNAPSHOT"
 
