@@ -1,5 +1,7 @@
 package controllers
 
+import de.knxamk.controller.Controller
+import de.knxamk.util.factories.StageFactory
 import javax.inject._
 import play.api.mvc._
 
@@ -10,6 +12,8 @@ import play.api.mvc._
 @Singleton
 class HomeController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
 
+    val controller: Controller = new Controller(new StageFactory().createTestStages()(1))
+
     /**
      * Create an Action to render an HTML page.
      *
@@ -18,6 +22,11 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
      * a path of `/`.
      */
     def index() = Action { implicit request: Request[AnyContent] =>
-        Ok(views.html.index())
+        Ok(views.html.index(getGameString()))
     }
+
+    def getGameString(): String = {
+        controller.toJson
+    }
+
 }
