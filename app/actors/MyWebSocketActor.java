@@ -1,23 +1,46 @@
 package actors;
 
-import akka.actor.*;
+import akka.actor.AbstractActor;
+import akka.actor.ActorRef;
+import akka.actor.Props;
+import controllers.HomeController;
 
-public class MyWebSocketActor extends AbstractActor {
+import java.util.Arrays;
 
-    public static Props props(ActorRef out) {
+public class MyWebSocketActor extends AbstractActor
+{
+
+    public static Props props(ActorRef out)
+    {
         return Props.create(MyWebSocketActor.class, out);
     }
 
     private final ActorRef out;
 
-    public MyWebSocketActor(ActorRef out) {
+    public MyWebSocketActor(ActorRef out)
+    {
         this.out = out;
     }
 
     @Override
-    public Receive createReceive() {
+    public Receive createReceive()
+    {
         return receiveBuilder()
-                .match(String.class, message -> out.tell("I received your message: " + message, self()))
+                .match(String.class, message -> {
+                    System.out.println(message);
+                    out.tell(processInput(message), self());
+                })
                 .build();
+    }
+
+    private String processInput(String message)
+    {
+        switch (message)
+        {
+            case "game":
+                return HomeController.controller.toJson();
+            default:
+                return "unknown command";
+        }
     }
 }

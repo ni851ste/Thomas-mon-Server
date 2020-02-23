@@ -26,6 +26,7 @@ body {
 .topnav a:hover {
     background-color: #ddd;
     color: black;
+    cursor: pointer;
 }
 
 .topnav a.active {
@@ -33,10 +34,16 @@ body {
     color: white;
 }
 
+#main-content-body {
+    justify-content: center;
+    box-sizing: border-box;
+    display: flex;
+}
+
 #centered-content {
     display: flex;
     flex-direction: row;
-    box-sizing: border-box;
+    vertical-align: baseline;
     justify-content: center;
 
     color: white;
@@ -44,7 +51,6 @@ body {
 }
 
 #centered-scrollable-content {
-    vertical-align: baseline;
     text-align: center;
     width: 640px;
 }
