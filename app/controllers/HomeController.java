@@ -18,9 +18,11 @@ import javax.inject.Inject;
  */
 public class HomeController extends Controller
 {
+    public static BackendController controller = new BackendController(new StageFactory().createTestStages()[0]);
 
     private final ActorSystem actorSystem;
     private final Materializer materializer;
+
 
     @Inject
     public HomeController(ActorSystem actorSystem, Materializer materializer)
@@ -34,8 +36,6 @@ public class HomeController extends Controller
         return WebSocket.Text.accept(
                 request -> ActorFlow.actorRef(MyWebSocketActor::props, actorSystem, materializer));
     }
-
-    BackendController controller = new BackendController(new StageFactory().createTestStages()[0]);
 
 
     /**

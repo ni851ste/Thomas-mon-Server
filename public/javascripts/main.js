@@ -15,6 +15,7 @@ $(document).ready(function () {
     $('#top-nav-game').click(function () {
             websocket.send(GAME);
             topNavChangeActiveElement($(this));
+            renderGamePage();
         }
     );
     $('#top-nav-jtk').click(function () {
@@ -30,6 +31,7 @@ $(document).ready(function () {
     $('#top-nav-test').click(function () {
             websocket.send(TEST);
             topNavChangeActiveElement($(this));
+            appendAnotherChrishurt()
         }
     );
     console.log('Try to connect to websocket.');
@@ -38,11 +40,43 @@ $(document).ready(function () {
 
 function topNavChangeActiveElement(newActive) {
     $('.active').removeClass('active');
-    newActive.attr('class', 'active');
+    newActive.addClass('active');
 }
 
-function handleMessage(parse) {
+function renderGamePage() {
+    $('#side-content').remove();
+    $('#centered-scrollable-content')
+        .empty()
+        .css({'width': '960px'})
+        .append(
+            $('<div/>', {'class': 'scrollable-content'})
+                .append(
+                    $('<p>', {'text': 'GAME HEADER'})
+                )
+        ).append(
+        $('<div/>', {'class': 'scrollable-content'})
+            .append(
+                $('<p>', {'text': 'GAME HEADER'})
+            )
+    );
+}
 
+function appendAnotherChrishurt() {
+    console.log('Append Chrishurt');
+    $('.side-content-block')
+        .append(
+            $('<img/>', {'src': '/assets/images/chrischi_gobnik.png', 'alt': 'Chrishi'})
+        );
+}
+
+function handleMessage(json) {
+    switch (String(json.controllerState)) {
+        case "MOVE":
+            break;
+
+        default:
+            alert("Unknown game status: " + String(json.board.state))
+    }
 }
 
 function connectWebSocket() {
@@ -65,8 +99,8 @@ function connectWebSocket() {
 
     websocket.onmessage = function (e) {
         if (typeof e.data === 'string') {
-            handleMessage(JSON.parse(e.data));
             console.log('MESSAGE: ' + e.data);
+            //handleMessage(JSON.parse(e.data));
         }
     };
 }

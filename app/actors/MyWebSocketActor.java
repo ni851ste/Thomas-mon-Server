@@ -3,6 +3,9 @@ package actors;
 import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.actor.Props;
+import controllers.HomeController;
+
+import java.util.Arrays;
 
 public class MyWebSocketActor extends AbstractActor
 {
@@ -34,16 +37,8 @@ public class MyWebSocketActor extends AbstractActor
     {
         switch (message)
         {
-            case "test":
-                return "test";
-            case "home":
-                return "home";
             case "game":
-                return "game";
-            case "jaronthekid":
-                return "jaronthekid";
-            case "gamepicker":
-                return "gamepicker";
+                return HomeController.controller.toJson();
             default:
                 return "unknown command";
         }
