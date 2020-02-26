@@ -4,6 +4,14 @@ body {
     background-color: #232323;
 }
 
+a:link {
+    color: #4CFF00;
+}
+
+a:visited {
+    color: #3DCC00;
+}
+
 .topnav {
     overflow: hidden;
     /* position: fixed; */
@@ -67,6 +75,10 @@ body {
     border-radius: 8px;
 
     margin-bottom: 16px;
+}
+
+.scrollable-content:hover, .side-content-block:hover {
+    background-color: #2B2B2B;
 }
 
 .side-content-block {
