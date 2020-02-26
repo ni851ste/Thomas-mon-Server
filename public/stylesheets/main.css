@@ -4,10 +4,6 @@ body {
     background-color: #232323;
 }
 
-a:link {
-    color: #4CFF00;
-}
-
 a:visited {
     color: #3DCC00;
 }
@@ -44,8 +40,8 @@ a:visited {
 
 #main-content-body {
     justify-content: center;
-    box-sizing: border-box;
     display: flex;
+    box-sizing: border-box;
 }
 
 #centered-content {

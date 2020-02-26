@@ -34,6 +34,8 @@ $(document).ready(function () {
     $('#top-nav-tgs').click(function () {
             websocket.send(GAMEPICKER);
             topNavChangeActiveElement($(this));
+            unRenderCurrentPage();
+            renderTgsGamePickerPage();
         }
     );
     renderHomePage();
@@ -53,24 +55,26 @@ function renderHomePage() {
             .append($('<h1>').text('Home'))
             .append($('<h2>').text('Welcome to JaronTheKids grave after TGS 1!'))
             .append($('<p>').append($('<b>').text('Subscribe to Jaron the Kid!')))
-            .append($('<p>').append($('<a>', {'href': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'})
+            .append($('<p>').append($('<a>', {'href': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 'target': '_blank'})
                 .text('EZ Clap')))
-            .append($('<p>').append($('<a>', {'href': 'https://docs.google.com/spreadsheets/d/1iYtbbdUjsZiCCtWr0G4_1lI8AxB-6bfLSVwn7rvgUsQ/edit#gid=0'})
+            .append($('<p>').append($('<a>',
+                {'href': 'https://docs.google.com/spreadsheets/d/1iYtbbdUjsZiCCtWr0G4_1lI8AxB-6bfLSVwn7rvgUsQ/edit#gid=0',
+                    'target': '_blank'})
                 .text('The Grand Slam'))))
         .append($('<div>', {'class': 'scrollable-content'})
-            .append($('<p>').text('1'))
+            .append($('<h1>').text('1'))
             .append($('<p>').text(content))
         )
         .append($('<div>', {'class': 'scrollable-content'})
-            .append($('<p>').text('2'))
+            .append($('<h1>').text('2'))
             .append($('<p>').text(content))
         )
         .append($('<div>', {'class': 'scrollable-content'})
-            .append($('<p>').text('3'))
+            .append($('<h1>').text('3'))
             .append($('<p>').text(content))
         )
         .append($('<div>', {'class': 'scrollable-content'})
-            .append($('<p>').text('4'))
+            .append($('<h1>').text('4'))
             .append($('<p>').text(content))
         );
 
@@ -97,7 +101,21 @@ function renderGamePage() {
         .append(
             $('<div/>', {'class': 'scrollable-content'})
                 .append(
-                    $('<p>', {'text': 'GAME HEADER'})
+                    $('<h1>', {'text': 'GAME HEADER'})
+                )
+        );
+}
+
+function renderTgsGamePickerPage() {
+    currentPage = 'tgs-game-picker';
+    $('#side-content').remove();
+    $('#centered-scrollable-content')
+        .empty()
+        .css({'width': '960px'})
+        .append(
+            $('<div/>', {'class': 'scrollable-content'})
+                .append(
+                    $('<h1>', {'text': 'TGS Game Picker'})
                 )
         );
 }
@@ -111,6 +129,9 @@ function unRenderCurrentPage() {
         case "game":
             unRenderGamePage();
             break;
+        case "tgs-game-picker":
+            unRenderTgsGamePickerPage();
+            break;
     }
 }
 
@@ -120,6 +141,15 @@ function unRenderHomePage() {
 }
 
 function unRenderGamePage() {
+    $('#centered-scrollable-content')
+        .removeAttr('style')
+        .empty();
+    $('#centered-content').append(
+        $('<div/>', {'id': 'side-content'})
+    );
+}
+
+function unRenderTgsGamePickerPage() {
     $('#centered-scrollable-content')
         .removeAttr('style')
         .empty();
