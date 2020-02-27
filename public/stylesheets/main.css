@@ -4,6 +4,14 @@ body {
     background-color: #232323;
 }
 
+a:link {
+    color: #4CFF00;
+}
+
+a:visited {
+    color: #3DCC00;
+}
+
 .topnav {
     overflow: hidden;
     /* position: fixed; */
@@ -69,8 +77,25 @@ body {
     margin-bottom: 16px;
 }
 
+.scrollable-content:hover, .side-content-block:hover {
+    background-color: #2B2B2B;
+}
+
 .side-content-block {
     text-align: center;
+}
+
+#add-chr-btn {
+    border:none;
+    padding: 1.2em;
+    background-color: dimgray;
+    color: white;
+}
+
+#add-chr-btn:hover {
+    background-color: #ddd;
+    color: black;
+    cursor: pointer;
 }
 
 

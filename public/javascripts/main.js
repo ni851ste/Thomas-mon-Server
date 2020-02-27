@@ -3,37 +3,40 @@ const GAME = 'game';
 const JARONTHEKID = 'jaronthekid';
 const GAMEPICKER = 'gamepicker';
 const TEST = 'test';
+const ADD_CHR = 'addChr';
+const RM_CHR = 'rmChr';
 
 let websocket;
+let currentPage;
 
 $(document).ready(function () {
     $('#top-nav-home').click(function () {
             websocket.send(HOME);
             topNavChangeActiveElement($(this));
+            unRenderCurrentPage();
+            renderHomePage();
         }
     );
     $('#top-nav-game').click(function () {
             websocket.send(GAME);
             topNavChangeActiveElement($(this));
+            unRenderCurrentPage();
             renderGamePage();
         }
     );
+    /*
     $('#top-nav-jtk').click(function () {
             websocket.send(JARONTHEKID);
             topNavChangeActiveElement($(this));
         }
     );
+     */
     $('#top-nav-tgs').click(function () {
             websocket.send(GAMEPICKER);
             topNavChangeActiveElement($(this));
         }
     );
-    $('#top-nav-test').click(function () {
-            websocket.send(TEST);
-            topNavChangeActiveElement($(this));
-            appendAnotherChrishurt()
-        }
-    );
+    renderHomePage();
     console.log('Try to connect to websocket.');
     connectWebSocket();
 });
@@ -43,7 +46,50 @@ function topNavChangeActiveElement(newActive) {
     newActive.addClass('active');
 }
 
+function renderHomePage() {
+    currentPage = 'home';
+    $('#centered-scrollable-content')
+        .append($('<div/>', {'class': 'scrollable-content'})
+            .append($('<h1>').text('Home'))
+            .append($('<h2>').text('Welcome to JaronTheKids grave after TGS 1!'))
+            .append($('<p>').append($('<b>').text('Subscribe to Jaron the Kid!')))
+            .append($('<p>').append($('<a>', {'href': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'})
+                .text('EZ Clap')))
+            .append($('<p>').append($('<a>', {'href': 'https://docs.google.com/spreadsheets/d/1iYtbbdUjsZiCCtWr0G4_1lI8AxB-6bfLSVwn7rvgUsQ/edit#gid=0'})
+                .text('The Grand Slam'))))
+        .append($('<div>', {'class': 'scrollable-content'})
+            .append($('<p>').text('1'))
+            .append($('<p>').text(content))
+        )
+        .append($('<div>', {'class': 'scrollable-content'})
+            .append($('<p>').text('2'))
+            .append($('<p>').text(content))
+        )
+        .append($('<div>', {'class': 'scrollable-content'})
+            .append($('<p>').text('3'))
+            .append($('<p>').text(content))
+        )
+        .append($('<div>', {'class': 'scrollable-content'})
+            .append($('<p>').text('4'))
+            .append($('<p>').text(content))
+        );
+
+    $('#side-content')
+        .append($('<div>', {'class': 'side-content-block'})
+            .append($('<p>').text('This is the side content'))
+            .append($('<p>')
+                .append($('<button>', {'type': 'button', 'id': 'add-chr-btn'})
+                    .text('ADD CHRISHURT')
+                    .click(function () {
+                        websocket.send(ADD_CHR);
+                        appendAnotherChrishurt()
+                    })))
+            .append($('<img>', {'src': '/assets/images/chrischi_gobnik.png', 'alt': 'Chrishi'}))
+        );
+}
+
 function renderGamePage() {
+    currentPage = 'game';
     $('#side-content').remove();
     $('#centered-scrollable-content')
         .empty()
@@ -53,11 +99,32 @@ function renderGamePage() {
                 .append(
                     $('<p>', {'text': 'GAME HEADER'})
                 )
-        ).append(
-        $('<div/>', {'class': 'scrollable-content'})
-            .append(
-                $('<p>', {'text': 'GAME HEADER'})
-            )
+        );
+}
+
+function unRenderCurrentPage() {
+    console.log('Unrendered page: ' + currentPage);
+    switch (currentPage) {
+        case "home":
+            unRenderHomePage();
+            break;
+        case "game":
+            unRenderGamePage();
+            break;
+    }
+}
+
+function unRenderHomePage() {
+    $('#centered-scrollable-content').empty();
+    $('#side-content').empty();
+}
+
+function unRenderGamePage() {
+    $('#centered-scrollable-content')
+        .removeAttr('style')
+        .empty();
+    $('#centered-content').append(
+        $('<div/>', {'id': 'side-content'})
     );
 }
 
@@ -104,3 +171,6 @@ function connectWebSocket() {
         }
     };
 }
+
+
+const content = 'This is a post content';
