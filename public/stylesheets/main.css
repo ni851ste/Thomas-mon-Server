@@ -85,4 +85,17 @@ a:visited {
     text-align: center;
 }
 
+#add-chr-btn {
+    border:none;
+    padding: 1.2em;
+    background-color: dimgray;
+    color: white;
+}
+
+#add-chr-btn:hover {
+    background-color: #ddd;
+    color: black;
+    cursor: pointer;
+}
+
 

@@ -24,23 +24,18 @@ $(document).ready(function () {
             renderGamePage();
         }
     );
+    /*
     $('#top-nav-jtk').click(function () {
             websocket.send(JARONTHEKID);
             topNavChangeActiveElement($(this));
         }
     );
+     */
     $('#top-nav-tgs').click(function () {
             websocket.send(GAMEPICKER);
             topNavChangeActiveElement($(this));
         }
     );
-    $('#top-nav-add-chr').click(function () {
-            websocket.send(ADD_CHR);
-            topNavChangeActiveElement($(this));
-            appendAnotherChrishurt()
-        }
-    );
-
     renderHomePage();
     console.log('Try to connect to websocket.');
     connectWebSocket();
@@ -82,8 +77,15 @@ function renderHomePage() {
     $('#side-content')
         .append($('<div>', {'class': 'side-content-block'})
             .append($('<p>').text('This is the side content'))
+            .append($('<p>')
+                .append($('<button>', {'type': 'button', 'id': 'add-chr-btn'})
+                    .text('ADD CHRISHURT')
+                    .click(function () {
+                        websocket.send(ADD_CHR);
+                        appendAnotherChrishurt()
+                    })))
             .append($('<img>', {'src': '/assets/images/chrischi_gobnik.png', 'alt': 'Chrishi'}))
-        )
+        );
 }
 
 function renderGamePage() {
