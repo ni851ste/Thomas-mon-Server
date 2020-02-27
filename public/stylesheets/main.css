@@ -94,4 +94,41 @@ a:visited {
     cursor: pointer;
 }
 
+/* ######################################## */
+
+#tgs-game-picker-frame {
+    justify-content: center;
+    display: flex;
+}
+
+#tgs-game-left {
+    margin-right: 1em;
+}
+
+#tgs-game-right {
+    margin-left: 1em;
+}
+
+#tgs-game-left, #tgs-game-right {
+    width: 37%;
+
+    border: 2px solid white;
+    border-radius: 8px;
+
+    padding: 1em;
+    margin-bottom: 2em;
+}
+
+#tgs-game-middle {
+    padding: 1em;
+}
+
+.random-game {
+    border: 2px solid white;
+    border-radius: 8px;
+
+    padding: 1em;
+    margin: 1em;
+}
+
 

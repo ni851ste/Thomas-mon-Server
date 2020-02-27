@@ -55,11 +55,16 @@ function renderHomePage() {
             .append($('<h1>').text('Home'))
             .append($('<h2>').text('Welcome to JaronTheKids grave after TGS 1!'))
             .append($('<p>').append($('<b>').text('Subscribe to Jaron the Kid!')))
-            .append($('<p>').append($('<a>', {'href': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 'target': '_blank'})
+            .append($('<p>').append($('<a>', {
+                'href': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                'target': '_blank'
+            })
                 .text('EZ Clap')))
             .append($('<p>').append($('<a>',
-                {'href': 'https://docs.google.com/spreadsheets/d/1iYtbbdUjsZiCCtWr0G4_1lI8AxB-6bfLSVwn7rvgUsQ/edit#gid=0',
-                    'target': '_blank'})
+                {
+                    'href': 'https://docs.google.com/spreadsheets/d/1iYtbbdUjsZiCCtWr0G4_1lI8AxB-6bfLSVwn7rvgUsQ/edit#gid=0',
+                    'target': '_blank'
+                })
                 .text('The Grand Slam'))))
         .append($('<div>', {'class': 'scrollable-content'})
             .append($('<h1>').text('1'))
@@ -100,8 +105,7 @@ function renderGamePage() {
         .css({'width': '960px'})
         .append(
             $('<div/>', {'class': 'scrollable-content'})
-                .append(
-                    $('<h1>', {'text': 'GAME HEADER'})
+                .append($('<h1>', {'text': 'GAME HEADER'})
                 )
         );
 }
@@ -112,11 +116,22 @@ function renderTgsGamePickerPage() {
     $('#centered-scrollable-content')
         .empty()
         .css({'width': '960px'})
-        .append(
-            $('<div/>', {'class': 'scrollable-content'})
-                .append(
-                    $('<h1>', {'text': 'TGS Game Picker'})
-                )
+        .append($('<div/>', {'class': 'scrollable-content'})
+            .append($('<h1>', {'text': 'TGS Game Picker'}))
+            .append($('<div>', {'id': 'tgs-frame'})
+                .append($('<p>').text('BUTTONS HERE'))
+                .append($('<div>', {'id': 'tgs-game-picker-frame'})
+                    .append($('<div>', {'id': 'tgs-game-left'})
+                        .append($('<h2>').text('left'))
+                        .append($('<div>', { 'id': 'test-game1', 'class': 'random-game'}).text('TEST GAME 1'))
+                        .append($('<div>', { 'id': 'test-game2', 'class': 'random-game'}).text('TEST GAME 2'))
+                        .append($('<div>', { 'id': 'test-game3', 'class': 'random-game'}).text('TEST GAME 3'))
+                        .append($('<div>', { 'id': 'test-game4', 'class': 'random-game'}).text('TEST GAME 4'))
+
+                    )
+                    .append($('<div>', {'id': 'tgs-game-middle'}).text('middle'))
+                    .append($('<div>', {'id': 'tgs-game-right'}).text('right'))
+                ))
         );
 }
 
