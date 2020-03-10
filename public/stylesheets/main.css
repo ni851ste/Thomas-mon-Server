@@ -81,20 +81,34 @@ a:visited {
     text-align: center;
 }
 
-#add-chr-btn {
+.own-button {
+    border:none;
+    background-color: dimgray;
+    color: white;
+}
+
+.own-button-big {
     border:none;
     padding: 1.2em;
     background-color: dimgray;
     color: white;
 }
 
-#add-chr-btn:hover {
+.own-button-big:hover, .own-button:hover {
     background-color: #ddd;
     color: black;
     cursor: pointer;
 }
 
 /* ######################################## */
+
+#tgs-game-picker {
+    text-align: center;
+    width: 960px;
+
+    border: 2px solid white;
+    border-radius: 8px;
+}
 
 #tgs-game-picker-frame {
     justify-content: center;
@@ -129,6 +143,20 @@ a:visited {
 
     padding: 1em;
     margin: 1em;
+}
+
+.random-game:hover {
+    background-color: #2B2B2B;
+}
+
+#tgs-random-game-counter-div {
+    margin-top: 1em;
+    display: flex;
+    justify-content: center;
+}
+
+#tgs-random-game-counter {
+    padding: 5px 10px;
 }
 
 

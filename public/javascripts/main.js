@@ -17,6 +17,7 @@ $(document).ready(function () {
             renderHomePage();
         }
     );
+    /*
     $('#top-nav-game').click(function () {
             websocket.send(GAME);
             topNavChangeActiveElement($(this));
@@ -24,6 +25,7 @@ $(document).ready(function () {
             renderGamePage();
         }
     );
+     */
     /*
     $('#top-nav-jtk').click(function () {
             websocket.send(JARONTHEKID);
@@ -42,11 +44,6 @@ $(document).ready(function () {
     console.log('Try to connect to websocket.');
     connectWebSocket();
 });
-
-function topNavChangeActiveElement(newActive) {
-    $('.active').removeClass('active');
-    newActive.addClass('active');
-}
 
 function renderHomePage() {
     currentPage = 'home';
@@ -87,7 +84,7 @@ function renderHomePage() {
         .append($('<div>', {'class': 'side-content-block'})
             .append($('<p>').text('This is the side content'))
             .append($('<p>')
-                .append($('<button>', {'type': 'button', 'id': 'add-chr-btn'})
+                .append($('<button>', {'type': 'button', 'id': 'add-chr-btn', 'class': 'own-button-big'})
                     .text('ADD CHRISHURT')
                     .click(function () {
                         websocket.send(ADD_CHR);
@@ -113,26 +110,39 @@ function renderGamePage() {
 function renderTgsGamePickerPage() {
     currentPage = 'tgs-game-picker';
     $('#side-content').remove();
-    $('#centered-scrollable-content')
+    $('#centered-scrollable-content').remove();
+    $('#centered-content')
         .empty()
-        .css({'width': '960px'})
-        .append($('<div/>', {'class': 'scrollable-content'})
+        .append($('<div>', {'id': 'tgs-game-picker'})
             .append($('<h1>', {'text': 'TGS Game Picker'}))
             .append($('<div>', {'id': 'tgs-frame'})
                 .append($('<p>').text('BUTTONS HERE'))
                 .append($('<div>', {'id': 'tgs-game-picker-frame'})
                     .append($('<div>', {'id': 'tgs-game-left'})
                         .append($('<h2>').text('left'))
-                        .append($('<div>', { 'id': 'test-game1', 'class': 'random-game'}).text('TEST GAME 1'))
-                        .append($('<div>', { 'id': 'test-game2', 'class': 'random-game'}).text('TEST GAME 2'))
-                        .append($('<div>', { 'id': 'test-game3', 'class': 'random-game'}).text('TEST GAME 3'))
-                        .append($('<div>', { 'id': 'test-game4', 'class': 'random-game'}).text('TEST GAME 4'))
-
-                    )
-                    .append($('<div>', {'id': 'tgs-game-middle'}).text('middle'))
+                        .append($('<div>', {'id': 'test-game1', 'class': 'random-game'}).text('TEST GAME 1'))
+                        .append($('<div>', {'id': 'test-game2', 'class': 'random-game'}).text('TEST GAME 2'))
+                        .append($('<div>', {'id': 'test-game3', 'class': 'random-game'}).text('TEST GAME 3'))
+                        .append($('<div>', {'id': 'test-game4', 'class': 'random-game'}).text('TEST GAME 4')))
+                    .append($('<div>', {'id': 'tgs-game-middle'})
+                        .append($('<div>').text('middle'))
+                        .append($('<button>', {'id': 'tgs-roll-games', 'class': 'own-button-big'}).text('Roll'))
+                        .append($('<div>', {'id': 'tgs-random-game-counter-div'})
+                            .append($('<button>', {'id': 'tgs-random-game-plus', 'class': 'own-button'})
+                                .text('+')
+                                .click(function () {
+                                    tgsRollRandomGameCountPlus();
+                                }))
+                            .append($('<div>', {'id': 'tgs-random-game-counter'}).text('1'))
+                            .append($('<button>', {'id': 'tgs-random-game-minus', 'class': 'own-button'})
+                                .text('-')
+                                .click(function () {
+                                    tgsRollRandomGameCountMinus();
+                                }))
+                        ))
                     .append($('<div>', {'id': 'tgs-game-right'}).text('right'))
-                ))
-        );
+                )
+            ));
 }
 
 function unRenderCurrentPage() {
@@ -165,12 +175,16 @@ function unRenderGamePage() {
 }
 
 function unRenderTgsGamePickerPage() {
-    $('#centered-scrollable-content')
-        .removeAttr('style')
-        .empty();
+    $('#tgs-game-picker').remove();
     $('#centered-content').append(
+        $('<div>', {'id': 'centered-scrollable-content'})).append(
         $('<div/>', {'id': 'side-content'})
     );
+}
+
+function topNavChangeActiveElement(newActive) {
+    $('.active').removeClass('active');
+    newActive.addClass('active');
 }
 
 function appendAnotherChrishurt() {
@@ -179,6 +193,20 @@ function appendAnotherChrishurt() {
         .append(
             $('<img/>', {'src': '/assets/images/chrischi_gobnik.png', 'alt': 'Chrishi'})
         );
+}
+
+function tgsRollRandomGameCountPlus() {
+    let currentElement = $('#tgs-random-game-counter');
+    let counter = parseInt(currentElement.text());
+    currentElement.text(++counter);
+}
+
+function tgsRollRandomGameCountMinus() {
+    let currentElement = $('#tgs-random-game-counter');
+    let counter = parseInt(currentElement.text());
+    if (counter > 1) {
+        currentElement.text(--counter);
+    }
 }
 
 function handleMessage(json) {
@@ -201,7 +229,7 @@ function connectWebSocket() {
     };
 
     websocket.onclose = function (event) {
-        //alert
+        //alert('Websocket closed!');
         console.log('Websocket closed!');
     };
 
