@@ -129,17 +129,18 @@ function renderTgsGamePickerPage() {
                     .append($('<div>', {'id': 'tgs-game-middle'})
                         .append($('<button>', {'id': 'tgs-roll-games', 'class': 'own-button-big'}).text('Roll'))
                         .append($('<div>', {'id': 'tgs-random-game-counter-div'})
-                            .append($('<button>', {'id': 'tgs-random-game-plus', 'class': 'own-button'})
-                                .text('+')
-                                .click(function () {
-                                    tgsRollRandomGameCountPlus();
-                                }))
-                            .append($('<div>', {'id': 'tgs-random-game-counter'}).text('1'))
                             .append($('<button>', {'id': 'tgs-random-game-minus', 'class': 'own-button'})
                                 .text('-')
                                 .click(function () {
                                     tgsRollRandomGameCountMinus();
                                 }))
+                            .append($('<div>', {'id': 'tgs-random-game-counter'}).text('1'))
+                            .append($('<button>', {'id': 'tgs-random-game-plus', 'class': 'own-button'})
+                                .text('+')
+                                .click(function () {
+                                    tgsRollRandomGameCountPlus();
+                                }))
+
                         ))
                     .append($('<div>', {'id': 'tgs-game-right'}).text('right'))
                 )
@@ -202,7 +203,9 @@ function appendAnotherChrishurt() {
 function tgsRollRandomGameCountPlus() {
     let currentElement = $('#tgs-random-game-counter');
     let counter = parseInt(currentElement.text());
-    currentElement.text(++counter);
+    if (counter < 15) {
+        currentElement.text(++counter);
+    }
 }
 
 function tgsRollRandomGameCountMinus() {
