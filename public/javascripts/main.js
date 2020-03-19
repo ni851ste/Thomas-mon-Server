@@ -82,6 +82,16 @@ function renderHomePage() {
 
     $('#side-content')
         .append($('<div>', {'class': 'side-content-block'})
+            .append($('<iframe>',
+                {'id': 'twitch-embed',
+                'src': 'https://player.twitch.tv/?channel=jaronthekid&parent=streamernews.example.com',
+                    'width': '307',
+                    'height': '174',
+                    'frameborder': '<frameborder>',
+                    'scrolling': 'false',
+                    'allowfullscreen': 'true',
+
+                }))
             .append($('<p>').text('This is the side content'))
             .append($('<p>')
                 .append($('<button>', {'type': 'button', 'id': 'add-chr-btn', 'class': 'own-button-big'})

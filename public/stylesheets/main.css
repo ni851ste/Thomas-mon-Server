@@ -157,6 +157,10 @@ a:visited {
     text-align: center;
 }
 
+#twitch-embed {
+    border-radius: 5px;
+}
+
 .own-button {
     border: none;
     background-color: dimgray;

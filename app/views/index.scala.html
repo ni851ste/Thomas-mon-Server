@@ -20,5 +20,21 @@
             </div>
         </div>
 
+    <script type="text/javascript">
+            var embed = new Twitch.Embed("twitch-embed", {
+                width: 312,
+                height: 175,
+                channel: "jaronthekid",
+                layout: "video",
+                autoplay: false,
+            });
+
+            embed.addEventListener(Twitch.Embed.VIDEO_READY, () => {
+                var player = embed.getPlayer();
+                player.play();
+            });
+    </script>
+    <script src="https://embed.twitch.tv/embed/v1.js"></script>
+
 
     }
