@@ -11,7 +11,7 @@ let currentPage;
 
 $(document).ready(function () {
     $('#top-nav-home').click(function () {
-            websocket.send(HOME);
+           // websocket.send(HOME);
             topNavChangeActiveElement($(this));
             unRenderCurrentPage();
             renderHomePage();
@@ -34,15 +34,15 @@ $(document).ready(function () {
     );
      */
     $('#top-nav-tgs').click(function () {
-            websocket.send(GAMEPICKER);
+           // websocket.send(GAMEPICKER);
             topNavChangeActiveElement($(this));
             unRenderCurrentPage();
             renderTgsGamePickerPage();
         }
     );
     renderHomePage();
-    console.log('Try to connect to websocket.');
-    connectWebSocket();
+    //console.log('Try to connect to websocket.');
+    //connectWebSocket();
 });
 
 function renderHomePage() {
@@ -97,7 +97,7 @@ function renderHomePage() {
                 .append($('<button>', {'type': 'button', 'id': 'add-chr-btn', 'class': 'own-button-big'})
                     .text('ADD CHRISHURT')
                     .click(function () {
-                        websocket.send(ADD_CHR);
+                        //websocket.send(ADD_CHR);
                         appendAnotherChrishurt()
                     })))
             .append($('<img>', {'src': '/assets/images/chrischi_gobnik.png', 'alt': 'Chrishi'}))
