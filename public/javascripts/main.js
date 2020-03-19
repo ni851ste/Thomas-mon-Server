@@ -119,13 +119,17 @@ function renderTgsGamePickerPage() {
                 .append($('<div>', {'id': 'tgs-game-picker-frame'})
                     .append($('<div>', {'id': 'tgs-game-left'})
                         .append($('<h1>').text('left'))
-                        .append($('<input>',
-                            {'id': 'tgs-add-game-field', 'type': 'text', 'placeholder': 'Add Game Here'}))
-                        .append($('<button>', {'id': 'tgs-add-game-button', 'class': 'own-button'})
-                            .text('Add Game')
-                            .click(function () {
-                                tgsAddRandomGameFromTextField();
-                            })))
+                        .append($('<div>', {'id': 'tgs-add-game-elements'})
+                            .append($('<input>',
+                                {
+                                    'id': 'tgs-add-game-field', 'type': 'text',
+                                    'placeholder': 'Add Game Here', 'maxlength': '18'
+                                }))
+                            .append($('<button>', {'id': 'tgs-add-game-button', 'class': 'own-button'})
+                                .text('Add Game')
+                                .click(function () {
+                                    tgsAddRandomGameFromTextField();
+                                }))))
                     .append($('<div>', {'id': 'tgs-game-middle'})
                         .append($('<button>', {'id': 'tgs-roll-games', 'class': 'own-button-big'})
                             .text('Roll')
