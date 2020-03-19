@@ -229,7 +229,12 @@ function tgsAddRandomGameFromTextField() {
 
 function tgsAddGameToLeftPage(value) {
     if (value) {
-        $('#tgs-game-left').append($('<div>', {'class': 'random-game'}).text(value));
+        $('#tgs-game-left')
+            .append($('<div>', {'class': 'random-game'})
+                .text(value)
+                .click( function () {
+                    $(this).remove();
+                }));
     }
 }
 
