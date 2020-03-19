@@ -155,7 +155,7 @@ a:visited {
     margin-left: 5%;
 }
 
-.random-game {
+.random-game, .rolled-game {
     border: 2px solid white;
     border-radius: 2px;
 
@@ -163,7 +163,7 @@ a:visited {
     margin: 1em;
 }
 
-.random-game:hover {
+.random-game:hover, .rolled-game:hover {
     background-color: #2B2B2B;
 }
 

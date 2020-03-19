@@ -124,10 +124,14 @@ function renderTgsGamePickerPage() {
                         .append($('<button>', {'id': 'tgs-add-game-button', 'class': 'own-button'})
                             .text('Add Game')
                             .click(function () {
-                                tgsAddRandomGame();
+                                tgsAddRandomGameFromTextField();
                             })))
                     .append($('<div>', {'id': 'tgs-game-middle'})
-                        .append($('<button>', {'id': 'tgs-roll-games', 'class': 'own-button-big'}).text('Roll'))
+                        .append($('<button>', {'id': 'tgs-roll-games', 'class': 'own-button-big'})
+                            .text('Roll')
+                            .click(function () {
+                                tgsRollRandomGames();
+                            }))
                         .append($('<div>', {'id': 'tgs-random-game-counter-div'})
                             .append($('<button>', {'id': 'tgs-random-game-minus', 'class': 'own-button'})
                                 .text('-')
@@ -140,14 +144,14 @@ function renderTgsGamePickerPage() {
                                 .click(function () {
                                     tgsRollRandomGameCountPlus();
                                 }))
-
                         ))
-                    .append($('<div>', {'id': 'tgs-game-right'}).text('right'))
+                    .append($('<div>', {'id': 'tgs-game-right'})
+                        .append($('<h1>').text('right')))
                 )
             ));
 
-    tgsAddRandomGameToHtml('TEST GAME 1');
-    tgsAddRandomGameToHtml('TEST GAME 2');
+    tgsAddGameToLeftPage('TEST GAME 1');
+    tgsAddGameToLeftPage('TEST GAME 2');
 }
 
 function unRenderCurrentPage() {
@@ -216,17 +220,39 @@ function tgsRollRandomGameCountMinus() {
     }
 }
 
-function tgsAddRandomGame() {
+function tgsAddRandomGameFromTextField() {
     let currentEle = $('#tgs-add-game-field');
     let value = currentEle.val();
-    tgsAddRandomGameToHtml(value);
+    tgsAddGameToLeftPage(value);
+    currentEle.val('');
 }
 
-function tgsAddRandomGameToHtml(value) {
-    let currentEle = $('#tgs-add-game-field');
+function tgsAddGameToLeftPage(value) {
     if (value) {
         $('#tgs-game-left').append($('<div>', {'class': 'random-game'}).text(value));
-        currentEle.val('');
+    }
+}
+
+function tgsAddGameToRightPage(value) {
+    if (value) {
+        $('#tgs-game-right').append($('<div>', {'class': 'rolled-game'}).text(value));
+    }
+}
+
+function tgsRollRandomGames() {
+    let counter = parseInt($('#tgs-random-game-counter').text());
+    let randomGames = $('.random-game');
+
+    if (counter <= randomGames.length) {
+        for (let i = 0; i < counter; i++) {
+            console.log(randomGames[i]);
+
+            let usedElement = randomGames[i];
+            tgsAddGameToRightPage($(usedElement).text());
+            usedElement.remove();
+        }
+
+
     }
 }
 
